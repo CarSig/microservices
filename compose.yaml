@@ -10,6 +10,8 @@ services:
   exposed_or_not_api:
     build: ./exposed_or_not
     container_name: exposed_or_not_api
+    env_file:
+      - .env
     environment:
       REDIS_HOST: ${XPOSED_OR_NOT_REDIS_HOST}
       REDIS_PORT: ${XPOSED_OR_NOT_REDIS_PORT}
@@ -26,6 +28,11 @@ services:
   redis:
     image: redis:7
     container_name: my_redis
+    command:
+      - redis-server
+      - --maxmemory 300mb
+      - --maxmemory-policy allkeys-lru
+      - --appendonly no
     ports:
       - "6379:6379"
     volumes:

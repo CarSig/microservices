@@ -36,6 +36,7 @@ def index() -> str:
     return 'welcome to the Items API'
 
 
+
 if __name__ == "__main__":
     uvicorn.run(
         "main:app",

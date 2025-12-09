@@ -13,14 +13,14 @@ router = APIRouter(
 
 @router.get("", response_model=Breaches)
 @router.get("/", response_model=Breaches)
-async def get_breaches(db: Session = Depends(get_db)):
-    breaches =await  breach_repo.get_all_breaches(db)
+async  def get_breaches(db: Session = Depends(get_db)):
+    breaches = await breach_repo.get_all_breaches(db)
     return Breaches(exposedBreaches=[Breach.model_validate(b) for b in breaches])
 
 
 
 @router.get("/{breach_id}",response_model=Breaches | dict)
-async def get_breach(breach_id: str, db: Session = Depends(get_db)):
+async  def get_breach(breach_id: str, db: Session = Depends(get_db)):
     breach = await breach_repo.get_breach_by_domain(db, breach_id)
     if breach:
         return Breaches(exposedBreaches=[Breach.model_validate(breach)])
