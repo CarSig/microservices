@@ -1,0 +1,29 @@
+services:
+  api:
+    build: .
+    container_name: xposed_or_not_api
+    environment:
+      REDIS_HOST: ${XPOSED_OR_NOT_REDIS_HOST}
+      REDIS_PORT: ${XPOSED_OR_NOT_REDIS_PORT}
+
+      POSTGRES_USER: ${XPOSED_OR_NOT_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${XPOSED_OR_NOT_POSTGRES_PASSWORD}
+      POSTGRES_DB: ${XPOSED_OR_NOT_POSTGRES_DB}
+      POSTGRES_HOST: ${XPOSED_OR_NOT_POSTGRES_HOST}
+      POSTGRES_PORT: ${XPOSED_OR_NOT_POSTGRES_PORT}
+
+    depends_on:
+      - redis
+    ports:
+      - "8000:5000"
+
+  redis:
+    image: redis:7
+    container_name: my_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:

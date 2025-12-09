@@ -1,0 +1,45 @@
+services:
+  api_gateway:
+    build: ./api_gateway
+    container_name: api_gateway
+    ports:
+      - "8000:8000"
+    depends_on:
+      - exposed_or_not_api
+
+  exposed_or_not_api:
+    build: ./exposed_or_not
+    container_name: exposed_or_not_api
+    environment:
+      REDIS_HOST: ${XPOSED_OR_NOT_REDIS_HOST}
+      REDIS_PORT: ${XPOSED_OR_NOT_REDIS_PORT}
+      POSTGRES_USER: ${XPOSED_OR_NOT_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${XPOSED_OR_NOT_POSTGRES_PASSWORD}
+      POSTGRES_DB: ${XPOSED_OR_NOT_POSTGRES_DB}
+      POSTGRES_HOST: ${XPOSED_OR_NOT_POSTGRES_HOST}
+      POSTGRES_PORT: ${XPOSED_OR_NOT_POSTGRES_PORT}
+    depends_on:
+      - redis
+    ports:
+      - "9100:5000"
+
+  redis:
+    image: redis:7
+    container_name: my_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  frontend:
+    build:
+      context: ./frontend_cyber
+      dockerfile: Dockerfile
+    container_name: xposed_or_not_frontend
+    environment:
+      VITE_API_URL: "http://api_gateway:8000"
+    ports:
+      - "5173:5173"
+
+volumes:
+  redis_data: {}

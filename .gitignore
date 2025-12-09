@@ -1,0 +1,104 @@
+
+# -----------------------------
+# ENVIRONMENT VARIABLES
+# -----------------------------
+.env
+.env.*
+.env.local
+*.env
+
+
+
+# -----------------------------
+# PYTHON
+# -----------------------------
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.log
+
+# Byte-compiled / optimized files
+*.pyc
+*.pyd
+*.pyo
+*~
+
+
+# -----------------------------
+# VIRTUAL ENVIRONMENTS
+# -----------------------------
+venv/
+env/
+.venv/
+.env/
+*/venv/
+*/.venv/
+
+
+# -----------------------------
+# EDITORS / IDEs
+# -----------------------------
+# VSCode
+.vscode/
+.history/
+.code-workspace
+
+# PyCharm
+.idea/
+
+# Jupyter
+.ipynb_checkpoints/
+
+
+# -----------------------------
+# PACKAGING / DEPENDENCIES
+# -----------------------------
+pip-wheel-metadata/
+__pypackages__/
+poetry.lock.bak
+.poetry/
+
+
+# -----------------------------
+# TESTING
+# -----------------------------
+.coverage
+.coverage.*
+.cache
+pytest.cache/
+
+
+# -----------------------------
+# DOCKER
+# -----------------------------
+docker-compose.override.yml
+docker-data/
+*.pid
+*.pid.lock
+
+
+# -----------------------------
+# FRONTEND (optional)
+# -----------------------------
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+
+
+# -----------------------------
+# MISC
+# -----------------------------
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+logs/
