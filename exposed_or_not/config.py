@@ -1,6 +1,6 @@
 import os
 from redis.asyncio import Redis
-# config settings for redis and postgres
+# config settings for redis and postgres!
 class RedisConfig:
     HOST = os.getenv('REDIS_HOST', 'localhost')
     PASSWORD = os.getenv('REDIS_PASSWORD', None)
