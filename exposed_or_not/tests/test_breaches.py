@@ -1,11 +1,12 @@
 from fastapi.testclient import TestClient
-from unittest.mock import patch
+from unittest.mock import patch,AsyncMock
 from main import app
 
 client = TestClient(app)
 
 
-@patch("services.breach_service.fetch_all_breaches", return_value=[])
+@patch("exposed_or_not.repositories.breach_repo.BreachRepository.fetch_all_breaches", new=AsyncMock(return_value=[]))
+
 def test_breaches_empty(mock_service):
     """
     This safely tests the endpoint without needing a real DB.
