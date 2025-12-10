@@ -3,10 +3,14 @@ import hashlib
 import inspect
 from config import config
 
+
 def redis_cache_db(ttl: int = 300):
     redisDB = config.REDIS.CLIENT
     def decorator(func):
         async def wrapper(*args, **kwargs):
+            # Skip Redis in tests
+            if config.TESTING:
+                return await func(*args, **kwargs)
             filtered_args = tuple(
                 a for a in args
                 if not hasattr(a, "execute") and not hasattr(a, "query")

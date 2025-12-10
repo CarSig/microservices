@@ -28,6 +28,10 @@ app.add_middleware(
 )
 
 
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
 
 @app.get("/")
 def index() -> str:
