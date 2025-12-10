@@ -30,6 +30,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
+          pip install pytest
 
       - name: Run exposed_or_not tests
         working-directory: exposed_or_not
@@ -46,6 +47,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
+          pip install pytest
 
       - name: Run api_gateway tests
         working-directory: api_gateway
