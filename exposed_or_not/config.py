@@ -1,7 +1,6 @@
 import os
 from redis.asyncio import Redis
-
-
+# config
 class RedisConfig:
     HOST = os.getenv('REDIS_HOST', 'localhost')
     PASSWORD = os.getenv('REDIS_PASSWORD', None)
