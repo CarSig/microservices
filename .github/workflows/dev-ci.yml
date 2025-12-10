@@ -40,7 +40,7 @@ jobs:
         env:
           TESTING: "1"
           PYTHONPATH: ${{ github.workspace }}
-        run: PYTHONPATH=$(pwd) pytest -q
+        run: pytest -q
 
       # ---------------------------------------------
       # TEST: api_gateway
