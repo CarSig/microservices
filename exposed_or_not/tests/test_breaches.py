@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 from unittest.mock import patch,AsyncMock
-from main import app
+from exposed_or_not.main import app
 
 client = TestClient(app)
 
