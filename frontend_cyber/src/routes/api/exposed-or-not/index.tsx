@@ -31,7 +31,7 @@ function RouteComponent() {
   // };
 
   if (breachesQuery.isLoading) return <p>Loading...</p>;
-  if (breachesQuery.isError) return <p>Error loading breaches</p>;
+  if (breachesQuery.isError) return <p>Error loading breaches -- {JSON.stringify(breachesQuery.error)}</p>;
 
   const breaches = breachesQuery?.data?.exposedBreaches;
 
