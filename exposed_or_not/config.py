@@ -26,6 +26,6 @@ class PostgresConfig:
 class Config:
     REDIS = RedisConfig()
     POSTGRES = PostgresConfig()
-    a = 50
+    TESTING = os.getenv('TESTING', '0') == '1'
 
 config = Config()
