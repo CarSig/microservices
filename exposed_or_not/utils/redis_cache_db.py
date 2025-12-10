@@ -1,8 +1,7 @@
 import json
 import hashlib
 import inspect
-from config import config
-import config
+from exposed_or_not.config import config
 
 
 def redis_cache_db(ttl: int = 300):
