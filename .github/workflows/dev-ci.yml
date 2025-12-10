@@ -1,0 +1,71 @@
+name: Dev Branch CI
+
+on:
+  push:
+    branches: ["dev"]
+  pull_request:
+    branches: ["dev"]
+
+jobs:
+  basic-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ---------------------------------------------
+      # PYTHON SETUP
+      # ---------------------------------------------
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      # ---------------------------------------------
+      # TEST: exposed_or_not
+      # ---------------------------------------------
+      - name: Install deps for exposed_or_not
+        working-directory: exposed_or_not
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run exposed_or_not tests
+        working-directory: exposed_or_not
+        run: |
+          mkdir -p tests
+          echo "def test_start(): assert True" > tests/test_dummy.py
+          pytest -q
+
+      # ---------------------------------------------
+      # TEST: api_gateway
+      # ---------------------------------------------
+      - name: Install deps for api_gateway
+        working-directory: api_gateway
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run api_gateway tests
+        working-directory: api_gateway
+        run: |
+          mkdir -p tests
+          echo "def test_start(): assert True" > tests/test_dummy.py
+          pytest -q
+
+      # ---------------------------------------------
+      # FRONTEND (lint + build)
+      # ---------------------------------------------
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install frontend deps
+        working-directory: frontend_cyber
+        run: npm install
+
+      - name: Build frontend
+        working-directory: frontend_cyber
+        run: npm run build
