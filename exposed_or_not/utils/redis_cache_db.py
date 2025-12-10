@@ -7,6 +7,9 @@ def redis_cache_db(ttl: int = 300):
     redisDB = config.REDIS.CLIENT
     def decorator(func):
         async def wrapper(*args, **kwargs):
+            # Skip Redis in tests
+            if TESTING: # type: ignore
+                return await func(*args, **kwargs)
             filtered_args = tuple(
                 a for a in args
                 if not hasattr(a, "execute") and not hasattr(a, "query")
