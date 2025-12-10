@@ -39,6 +39,7 @@ jobs:
         working-directory: exposed_or_not
         env:
           TESTING: "1"
+          PYTHONPATH: ${{ github.workspace }}
         run: PYTHONPATH=$(pwd) pytest -q
 
       # ---------------------------------------------
