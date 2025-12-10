@@ -33,7 +33,7 @@ jobs:
 
       - name: Install test deps for exposed_or_not
         working-directory: exposed_or_not
-        run: pip install pytest pytest-asyncio httpx
+        run: pip install pytest pytest-asyncio httpx  > /dev/null
 
       - name: Run exposed_or_not tests
         working-directory: exposed_or_not
