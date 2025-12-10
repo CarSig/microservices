@@ -5,7 +5,7 @@ from main import app
 client = TestClient(app)
 
 
-@patch("exposed_or_not.repositories.breach_repo.BreachRepository.fetch_all_breaches", new=AsyncMock(return_value=[]))
+@patch("repositories.breach_repo.BreachRepository.fetch_all_breaches", new=AsyncMock(return_value=[]))
 
 def test_breaches_empty():
     """
