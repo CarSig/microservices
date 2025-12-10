@@ -12,7 +12,7 @@ async def add_timing_header(request: Request, call_next):
 
     print(f"[{request.method}] {request.url.path} took {ms} ms")
 
-    # optional: send timing to frontend
     response.headers["X-Process-Time-ms"] = str(ms)
 
     return response
+
