@@ -30,14 +30,14 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest
+
+      - name: Install test deps for exposed_or_not
+        working-directory: exposed_or_not
+        run: pip install pytest pytest-asyncio httpx
 
       - name: Run exposed_or_not tests
         working-directory: exposed_or_not
-        run: |
-          mkdir -p tests
-          echo "def test_start(): assert True" > tests/test_dummy.py
-          pytest -q
+        run: pytest -q
 
       # ---------------------------------------------
       # TEST: api_gateway
@@ -47,7 +47,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest
+          pip install pytest pytest-asyncio
 
       - name: Run api_gateway tests
         working-directory: api_gateway
