@@ -37,7 +37,7 @@ jobs:
 
       - name: Run exposed_or_not tests
         working-directory: exposed_or_not
-        run: pytest -q
+        run: PYTHONPATH=$(pwd) pytest -q
 
       # ---------------------------------------------
       # TEST: api_gateway
