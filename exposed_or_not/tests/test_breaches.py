@@ -13,5 +13,5 @@ def test_breaches_empty():
     """
     response = client.get("/breaches")
     assert response.status_code == 200
-    assert response.json() == []
+    assert response.json() ==  {"exposedBreaches": []}
 
