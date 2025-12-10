@@ -28,8 +28,8 @@ jobs:
       - name: Install deps for exposed_or_not
         working-directory: exposed_or_not
         run: |
-          pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install --upgrade pip  > /dev/null
+          pip install -r requirements.txt  > /dev/null
 
       - name: Install test deps for exposed_or_not
         working-directory: exposed_or_not
@@ -48,9 +48,9 @@ jobs:
       - name: Install deps for api_gateway
         working-directory: api_gateway
         run: |
-          pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pytest pytest-asyncio
+          pip install --upgrade pip  > /dev/null
+          pip install -r requirements.txt  > /dev/null
+          pip install pytest pytest-asyncio  > /dev/null
 
       - name: Run api_gateway tests
         working-directory: api_gateway
@@ -69,8 +69,8 @@ jobs:
 
       - name: Install frontend deps
         working-directory: frontend_cyber
-        run: npm install
+        run: npm install  > /dev/null
 
       - name: Build frontend
         working-directory: frontend_cyber
-        run: npm run build
+        run: npm run build  > /dev/null
