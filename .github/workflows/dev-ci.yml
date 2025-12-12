@@ -23,20 +23,20 @@ jobs:
           python-version: "3.14"
 
       # ---------------------------------------------
-      # TEST: exposed_or_not
+      # TEST: domains
       # ---------------------------------------------
-      - name: Install deps for exposed_or_not
-        working-directory: exposed_or_not
+      - name: Install deps for domains
+        working-directory: domains
         run: |
           pip install --upgrade pip  > /dev/null
           pip install -r requirements.txt  > /dev/null
 
-      - name: Install test deps for exposed_or_not
-        working-directory: exposed_or_not
+      - name: Install test deps for domains
+        working-directory: domains
         run: pip install pytest pytest-asyncio httpx  > /dev/null
 
-      - name: Run exposed_or_not tests
-        working-directory: exposed_or_not
+      - name: Run domains tests
+        working-directory: domains
         env:
           TESTING: "1"
           PYTHONPATH: .

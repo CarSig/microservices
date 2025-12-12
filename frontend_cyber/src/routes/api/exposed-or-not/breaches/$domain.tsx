@@ -34,21 +34,21 @@ function RouteComponent() {
       <div className="mb-5 border-2 p-4 rounded-lg shadow-md">
         <h3>{breach?.domain}</h3>
         <img src={breach?.logo} alt={`${breach?.domain} logo`} className="h-16 mb-4" />
-        <p>{breach?.exposureDescription}</p>
+        <p>{breach?.exposure_description}</p>
         <p>
-          <strong>Records:</strong> {breach?.exposedRecords}
+          <strong>Records:</strong> {breach?.exposed_records}
         </p>
         <p>
           <strong>Industry:</strong> {breach?.industry}
         </p>
         <p>
-          <strong>Breached Date:</strong> {breach?.breachedDate}
+          <strong>Breached Date:</strong> {breach?.breached_date}
         </p>
         <p>
-          <strong>Exposed Data:</strong> {breach?.exposedData.join(", ")}
+          <strong>Exposed Data:</strong> {breach?.exposed_data.join(", ")}
         </p>
         <p>
-          <strong>Password Risk:</strong> {breach?.passwordRisk}
+          <strong>Password Risk:</strong> {breach?.password_risk}
         </p>
       </div>
     </div>

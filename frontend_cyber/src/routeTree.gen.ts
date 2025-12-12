@@ -14,7 +14,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiExposedOrNotIndexRouteImport } from './routes/api/exposed-or-not/index'
+import { Route as ApiExposedOrNotEmailsIndexRouteImport } from './routes/api/exposed-or-not/emails/index'
 import { Route as ApiExposedOrNotBreachesIndexRouteImport } from './routes/api/exposed-or-not/breaches/index'
+import { Route as ApiExposedOrNotEmailsEmailRouteImport } from './routes/api/exposed-or-not/emails/$email'
 import { Route as ApiExposedOrNotBreachesDomainRouteImport } from './routes/api/exposed-or-not/breaches/$domain'
 
 const ContactLazyRouteImport = createFileRoute('/contact')()
@@ -39,10 +41,22 @@ const ApiExposedOrNotIndexRoute = ApiExposedOrNotIndexRouteImport.update({
   path: '/api/exposed-or-not/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiExposedOrNotEmailsIndexRoute =
+  ApiExposedOrNotEmailsIndexRouteImport.update({
+    id: '/api/exposed-or-not/emails/',
+    path: '/api/exposed-or-not/emails/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiExposedOrNotBreachesIndexRoute =
   ApiExposedOrNotBreachesIndexRouteImport.update({
     id: '/api/exposed-or-not/breaches/',
     path: '/api/exposed-or-not/breaches/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiExposedOrNotEmailsEmailRoute =
+  ApiExposedOrNotEmailsEmailRouteImport.update({
+    id: '/api/exposed-or-not/emails/$email',
+    path: '/api/exposed-or-not/emails/$email',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ApiExposedOrNotBreachesDomainRoute =
@@ -58,7 +72,9 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactLazyRoute
   '/api/exposed-or-not': typeof ApiExposedOrNotIndexRoute
   '/api/exposed-or-not/breaches/$domain': typeof ApiExposedOrNotBreachesDomainRoute
+  '/api/exposed-or-not/emails/$email': typeof ApiExposedOrNotEmailsEmailRoute
   '/api/exposed-or-not/breaches': typeof ApiExposedOrNotBreachesIndexRoute
+  '/api/exposed-or-not/emails': typeof ApiExposedOrNotEmailsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -66,7 +82,9 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactLazyRoute
   '/api/exposed-or-not': typeof ApiExposedOrNotIndexRoute
   '/api/exposed-or-not/breaches/$domain': typeof ApiExposedOrNotBreachesDomainRoute
+  '/api/exposed-or-not/emails/$email': typeof ApiExposedOrNotEmailsEmailRoute
   '/api/exposed-or-not/breaches': typeof ApiExposedOrNotBreachesIndexRoute
+  '/api/exposed-or-not/emails': typeof ApiExposedOrNotEmailsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -75,7 +93,9 @@ export interface FileRoutesById {
   '/contact': typeof ContactLazyRoute
   '/api/exposed-or-not/': typeof ApiExposedOrNotIndexRoute
   '/api/exposed-or-not/breaches/$domain': typeof ApiExposedOrNotBreachesDomainRoute
+  '/api/exposed-or-not/emails/$email': typeof ApiExposedOrNotEmailsEmailRoute
   '/api/exposed-or-not/breaches/': typeof ApiExposedOrNotBreachesIndexRoute
+  '/api/exposed-or-not/emails/': typeof ApiExposedOrNotEmailsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -85,7 +105,9 @@ export interface FileRouteTypes {
     | '/contact'
     | '/api/exposed-or-not'
     | '/api/exposed-or-not/breaches/$domain'
+    | '/api/exposed-or-not/emails/$email'
     | '/api/exposed-or-not/breaches'
+    | '/api/exposed-or-not/emails'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -93,7 +115,9 @@ export interface FileRouteTypes {
     | '/contact'
     | '/api/exposed-or-not'
     | '/api/exposed-or-not/breaches/$domain'
+    | '/api/exposed-or-not/emails/$email'
     | '/api/exposed-or-not/breaches'
+    | '/api/exposed-or-not/emails'
   id:
     | '__root__'
     | '/'
@@ -101,7 +125,9 @@ export interface FileRouteTypes {
     | '/contact'
     | '/api/exposed-or-not/'
     | '/api/exposed-or-not/breaches/$domain'
+    | '/api/exposed-or-not/emails/$email'
     | '/api/exposed-or-not/breaches/'
+    | '/api/exposed-or-not/emails/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -110,7 +136,9 @@ export interface RootRouteChildren {
   ContactLazyRoute: typeof ContactLazyRoute
   ApiExposedOrNotIndexRoute: typeof ApiExposedOrNotIndexRoute
   ApiExposedOrNotBreachesDomainRoute: typeof ApiExposedOrNotBreachesDomainRoute
+  ApiExposedOrNotEmailsEmailRoute: typeof ApiExposedOrNotEmailsEmailRoute
   ApiExposedOrNotBreachesIndexRoute: typeof ApiExposedOrNotBreachesIndexRoute
+  ApiExposedOrNotEmailsIndexRoute: typeof ApiExposedOrNotEmailsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -143,11 +171,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiExposedOrNotIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/exposed-or-not/emails/': {
+      id: '/api/exposed-or-not/emails/'
+      path: '/api/exposed-or-not/emails'
+      fullPath: '/api/exposed-or-not/emails'
+      preLoaderRoute: typeof ApiExposedOrNotEmailsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/exposed-or-not/breaches/': {
       id: '/api/exposed-or-not/breaches/'
       path: '/api/exposed-or-not/breaches'
       fullPath: '/api/exposed-or-not/breaches'
       preLoaderRoute: typeof ApiExposedOrNotBreachesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/exposed-or-not/emails/$email': {
+      id: '/api/exposed-or-not/emails/$email'
+      path: '/api/exposed-or-not/emails/$email'
+      fullPath: '/api/exposed-or-not/emails/$email'
+      preLoaderRoute: typeof ApiExposedOrNotEmailsEmailRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/exposed-or-not/breaches/$domain': {
@@ -166,7 +208,9 @@ const rootRouteChildren: RootRouteChildren = {
   ContactLazyRoute: ContactLazyRoute,
   ApiExposedOrNotIndexRoute: ApiExposedOrNotIndexRoute,
   ApiExposedOrNotBreachesDomainRoute: ApiExposedOrNotBreachesDomainRoute,
+  ApiExposedOrNotEmailsEmailRoute: ApiExposedOrNotEmailsEmailRoute,
   ApiExposedOrNotBreachesIndexRoute: ApiExposedOrNotBreachesIndexRoute,
+  ApiExposedOrNotEmailsIndexRoute: ApiExposedOrNotEmailsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

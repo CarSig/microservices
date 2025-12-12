@@ -1,7 +1,8 @@
 from fastapi import FastAPI, Request, Response
 import httpx
 from fastapi.middleware.cors import CORSMiddleware
-
+import socket
+import os
 app = FastAPI()
 
 app.add_middleware(
@@ -12,39 +13,27 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+
+def resolve_or_default(host: str, port: int, fallback: str) -> str:
+    """Try to resolve <host>. If it doesn't exist, use fallback URL."""
+    try:
+        socket.gethostbyname(host)   # check if host exists (Docker)
+        return f"http://{host}:{port}"
+    except socket.gaierror:
+        return fallback
 # backend base URL inside Docker network
-EXPOSED_OR_NOT_URL = "http://exposed_or_not_api:5000"
+# EXPOSED_OR_NOT_URL = "http://exposed_or_not_api:5000"
+EXPOSED_OR_NOT_URL = resolve_or_default(
+    host="exposed_or_not_api",
+    port=5000,
+    fallback="http://localhost:5000"
+)
 
+print("▼▼▼ Backend auto-selected ▼▼▼")
+print("EXPOSED_OR_NOT_URL =", EXPOSED_OR_NOT_URL)
+print("▲▲▲ Backend auto-selected ▲▲▲")
 
-# @app.api_route("/{full_path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
-# async def proxy(full_path: str, request: Request):
-#     """Proxy ANY request dynamically to the backend service."""
-    
-#     url = f"{EXPOSED_OR_NOT_URL}/{full_path}"
-    
-#     # Extract method, headers, query params, body
-#     method = request.method
-#     headers = dict(request.headers)
-#     params = dict(request.query_params)
-    
-#     body = await request.body()
-    
-#     async with httpx.AsyncClient() as client:
-#         backend_response = await client.request(
-#             method=method,
-#             url=url,
-#             headers=headers,
-#             params=params,
-#             content=body
-#         )
-    
-#     # Return raw response from backend
-#     return Response(
-#         content=backend_response.content,
-#         status_code=backend_response.status_code,
-#         headers=dict(backend_response.headers),
-#         media_type=backend_response.headers.get("content-type")
-#     )
 
 
 async def proxy(request: Request, url: str):
@@ -96,7 +85,7 @@ async def emails(email: str, request: Request):
 
 @app.get("/analytics/{email}")
 async def analytics(email: str, request: Request):
-    return await proxy(request, f"{EXPOSED_OR_NOT_URL}/analytics/{email}")
+    return await proxy(request, f"{EXPOSED_OR_NOT_URL}/emails/analytics/{email}")
 
 
 @app.post("/store/breach")

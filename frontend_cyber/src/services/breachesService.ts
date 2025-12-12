@@ -1,13 +1,14 @@
 import { api } from "../lib/api_exposed";
-import type { BreachesResponse } from "../types/breach";
-import { toCamelCase } from "../../util/conversions";
+import type { components } from "../types/api";
 
-export async function getBreaches(): Promise<BreachesResponse> {
+type Breaches = components["schemas"]["Breaches"];
+
+export async function getBreaches(): Promise<Breaches> {
   const res = await api.get("/breaches");
-  return toCamelCase(res.data);
+  return res.data;
 }
 
-export async function getBreachByDomain(domain: string): Promise<BreachesResponse> {
+export async function getBreachByDomain(domain: string): Promise<Breaches> {
   const res = await api.get(`/breaches/${domain}`);
-  return toCamelCase(res.data);
+  return res.data;
 }

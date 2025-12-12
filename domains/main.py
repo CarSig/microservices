@@ -1,12 +1,15 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,Response
 from routes.emails import router as emails_router
 from routes.breach_router import router as breach_router
 from routes.store_to_db import router as store_to_db_router
+from routes.certs import router as certs_router
 import httpx
 from contextlib import asynccontextmanager
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from middleware.request_duration import add_timing_header
+from middleware.metrics import MetricsMiddleware 
+from prometheus_client import generate_latest
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -16,10 +19,13 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)    
 app.middleware("http")(add_timing_header)
+app.add_middleware(MetricsMiddleware)
+
 
 app.include_router(emails_router)
 app.include_router(breach_router)
 app.include_router(store_to_db_router)
+app.include_router(certs_router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -39,7 +45,9 @@ def index() -> str:
 
     return 'welcome to the Items API'
 
-
+@app.get("/metrics")
+def metrics():
+    return Response(generate_latest(), media_type="text/plain")
 
 if __name__ == "__main__":
     uvicorn.run(
