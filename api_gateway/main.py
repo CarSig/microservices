@@ -24,14 +24,14 @@ def resolve_or_default(host: str, port: int, fallback: str) -> str:
         return fallback
 # backend base URL inside Docker network
 # EXPOSED_OR_NOT_URL = "http://exposed_or_not_api:5000"
-EXPOSED_OR_NOT_URL = resolve_or_default(
-    host="exposed_or_not_api",
+DOMAINS_URL = resolve_or_default(
+    host="domains_api",
     port=5000,
     fallback="http://localhost:5000"
 )
 
 print("▼▼▼ Backend auto-selected ▼▼▼")
-print("EXPOSED_OR_NOT_URL =", EXPOSED_OR_NOT_URL)
+print("EXPOSED_OR_NOT_URL =", DOMAINS_URL)
 print("▲▲▲ Backend auto-selected ▲▲▲")
 
 
@@ -60,34 +60,34 @@ async def proxy(request: Request, url: str):
 
 @app.get("/")
 async def root(request: Request):
-    return await proxy(request, f"{EXPOSED_OR_NOT_URL}/")
+    return await proxy(request, f"{DOMAINS_URL}/")
 
 
 @app.get("/health")
 async def health(request: Request):
-    return await proxy(request, f"{EXPOSED_OR_NOT_URL}/health")
+    return await proxy(request, f"{DOMAINS_URL}/health")
 
 
 @app.get("/breaches")
 async def breaches(request: Request):
-    return await proxy(request, f"{EXPOSED_OR_NOT_URL}/breaches")
+    return await proxy(request, f"{DOMAINS_URL}/breaches")
 
 
 @app.get("/breaches/{breach_id}")
 async def breach(request: Request, breach_id: str):
-    return await proxy(request, f"{EXPOSED_OR_NOT_URL}/breaches/{breach_id}")
+    return await proxy(request, f"{DOMAINS_URL}/breaches/{breach_id}")
 
 
 @app.get("/emails/{email}")
 async def emails(email: str, request: Request):
-    return await proxy(request, f"{EXPOSED_OR_NOT_URL}/emails/{email}")
+    return await proxy(request, f"{DOMAINS_URL}/emails/{email}")
 
 
 @app.get("/analytics/{email}")
 async def analytics(email: str, request: Request):
-    return await proxy(request, f"{EXPOSED_OR_NOT_URL}/emails/analytics/{email}")
+    return await proxy(request, f"{DOMAINS_URL}/emails/analytics/{email}")
 
 
 @app.post("/store/breach")
 async def store_breach(request: Request):
-    return await proxy(request, f"{EXPOSED_OR_NOT_URL}/store/breach")
+    return await proxy(request, f"{DOMAINS_URL}/store/breach")
