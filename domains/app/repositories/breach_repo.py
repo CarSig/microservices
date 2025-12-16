@@ -6,7 +6,6 @@ from app.utils.redis_cache_db import redis_cache_db
 
 def save_breach_if_not_exists(db: Session, breach: Breach):
     data = breach.to_sqlalchemy()
-    # check by unique ID
     stmt = select(DomainBreach).where(DomainBreach.breach_id == data["breach_id"])
     existing = db.scalar(stmt)
     if existing:
