@@ -1,6 +1,6 @@
 from fastapi import APIRouter,Request
-from schemas.email_schema import EmailBreachAnalytics, EmailBreaches,ErrorResponse
-from services.emails_service import fetch_email_breaches, fetch_email_breach_analytics
+from app.schemas.email_schema import EmailBreachAnalytics, EmailBreaches,ErrorResponse
+from app.services.emails_service import fetch_email_breaches, fetch_email_breach_analytics
 
 
 

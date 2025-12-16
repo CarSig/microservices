@@ -1,11 +1,11 @@
 from fastapi.testclient import TestClient
 from unittest.mock import patch,AsyncMock
-from main import app
+from app.main import app
 
 client = TestClient(app)
 
 
-@patch("repositories.breach_repo.get_all_breaches", new=AsyncMock(return_value=[]))
+@patch("app.repositories.breach_repo.get_all_breaches", new=AsyncMock(return_value=[]))
 
 def test_breaches_empty():
     """

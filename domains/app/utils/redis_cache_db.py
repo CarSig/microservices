@@ -1,7 +1,7 @@
 import json
 import hashlib
 import inspect
-from config import config
+from app.config import config
 
 
 def redis_cache_db(ttl: int = 300):

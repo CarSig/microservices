@@ -1,14 +1,14 @@
 from fastapi import FastAPI,Response
-from routes.emails import router as emails_router
-from routes.breach_router import router as breach_router
-from routes.store_to_db import router as store_to_db_router
-from routes.certs import router as certs_router
+from app.routes.emails import router as emails_router
+from app.routes.breach_router import router as breach_router
+from app.routes.store_to_db import router as store_to_db_router
+from app.routes.certs import router as certs_router
 import httpx
 from contextlib import asynccontextmanager
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
-from middleware.request_duration import add_timing_header
-from middleware.metrics import MetricsMiddleware 
+from app.middleware.request_duration import add_timing_header
+from app.middleware.metrics import MetricsMiddleware 
 from prometheus_client import generate_latest
 
 @asynccontextmanager

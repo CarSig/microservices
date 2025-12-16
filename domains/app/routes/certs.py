@@ -1,7 +1,7 @@
 from fastapi import APIRouter,Request, HTTPException
-from schemas.SSL_schemas import CertificateInspectionResponse,ScoreResponse
-from services.SSL.certificate_service import inspect_domain
-from services.SSL.scores import calculate_scores
+from app.schemas.SSL_schemas import CertificateInspectionResponse,ScoreResponse
+from app.services.SSL.certificate_service import inspect_domain
+from app.services.SSL.scores import calculate_scores
 
 router = APIRouter(
     prefix="/certificates",

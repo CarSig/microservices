@@ -1,5 +1,5 @@
 from fastapi import APIRouter,Request,HTTPException
-from schemas.email_schema import EmailBreachAnalytics, EmailBreaches,ErrorResponse
+from app.schemas.email_schema import EmailBreachAnalytics, EmailBreaches,ErrorResponse
 
 base_url = "https://api.xposedornot.com/v1"
 XON_API = f"{base_url}/check-email"

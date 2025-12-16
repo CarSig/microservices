@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends,Request
 from sqlalchemy.orm import Session
-from db.session import get_db
-from services.breach_service import process_api_response
+from app.db.session import get_db
+from app.services.breach_service import process_api_response
 
 router = APIRouter(
     prefix="/store",

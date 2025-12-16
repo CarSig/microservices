@@ -1,6 +1,6 @@
 from fastapi import HTTPException
-from schemas.breach_schema import Breaches
-from repositories.breach_repo import save_breach_if_not_exists
+from app.schemas.breach_schema import Breaches
+from app.repositories.breach_repo import save_breach_if_not_exists
 from sqlalchemy.orm import Session
 base_url = "https://api.xposedornot.com/v1/"
 

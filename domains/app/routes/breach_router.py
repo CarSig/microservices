@@ -1,10 +1,10 @@
 from fastapi import APIRouter,Request
-from schemas.breach_schema import Breaches,Breach
 
-from repositories import breach_repo
 from fastapi import Depends
-from db.session import get_db
 from sqlalchemy.orm import Session
+from app.schemas.breach_schema import Breaches,Breach
+from app.db.session import get_db
+from app.repositories import breach_repo
 
 router = APIRouter(
     prefix="/breaches",

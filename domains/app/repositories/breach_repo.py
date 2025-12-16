@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import select
-from db.models.domain_breach import DomainBreach
-from schemas.breach_schema import Breach as Breach
-from utils.redis_cache_db import redis_cache_db
+from app.db.models.domain_breach import DomainBreach
+from app.schemas.breach_schema import Breach as Breach
+from app.utils.redis_cache_db import redis_cache_db
 
 def save_breach_if_not_exists(db: Session, breach: Breach):
     data = breach.to_sqlalchemy()

@@ -1,6 +1,6 @@
 
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
-from config import config
+from app.config import config
 
 DATABASE_URL = config.POSTGRES.DATABASE_URL.replace("psycopg2", "asyncpg")
 
