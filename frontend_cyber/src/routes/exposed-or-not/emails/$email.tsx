@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { getEmailBreach } from "../../../../services/breachedEmailsService";
+import { getEmailBreach } from "../../../services/breachedEmailsService";
 import { useQuery } from "@tanstack/react-query";
 
-export const Route = createFileRoute("/api/exposed-or-not/emails/$email")({
+export const Route = createFileRoute("/exposed-or-not/emails/$email")({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   loader: ({ params, context }): any => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

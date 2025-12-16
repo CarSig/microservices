@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import type { QueryClient } from "@tanstack/react-query";
-import { getBreaches } from "../../../../services/breachesService";
+import { getBreaches } from "../../../services/breachesService";
 import { Link } from "@tanstack/react-router";
 import { useState, useCallback } from "react";
-import type { components } from "../../../../types/api";
+import type { components } from "../../../types/api";
 
 type Breach = components["schemas"]["Breach"];
 
-export const Route = createFileRoute("/api/exposed-or-not/breaches/")({
+export const Route = createFileRoute("/exposed-or-not/breaches/")({
   loader: ({ context }) =>
     // quick cast so TS knows context has queryClient
     (context as { queryClient: QueryClient }).queryClient.prefetchQuery({
@@ -48,7 +48,7 @@ function RouteComponent() {
 
 function BreachItem({ b }: { b: Breach }) {
   return (
-    <Link to={"/api/exposed-or-not/breaches/$domain"} params={{ domain: b.domain }} className="no-underline text-inherit">
+    <Link to={"/exposed-or-not/breaches/$domain"} params={{ domain: b.domain }} className="no-underline text-inherit">
       <div className="mb-5 border-2 p-4 rounded-lg shadow-md">
         <h3>{b.domain}</h3>
         <p>

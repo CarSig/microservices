@@ -1,5 +1,7 @@
 import os
 from redis.asyncio import Redis
+from dotenv import load_dotenv
+load_dotenv()
 # config settings for redis and postgres!
 class RedisConfig:
     HOST = os.getenv('REDIS_HOST', 'localhost')

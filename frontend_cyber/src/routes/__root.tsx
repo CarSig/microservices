@@ -13,7 +13,7 @@ const RootLayout = () => (
       <Link to="/contact" className="[&.active]:font-bold">
         contact
       </Link>{" "}
-      <Link to="/api/exposed-or-not" className="[&.active]:font-bold">
+      <Link to="/exposed-or-not" className="[&.active]:font-bold">
         Exposed or Not
       </Link>
     </div>

@@ -3,12 +3,18 @@ FROM node:25.2.1 AS build
 
 WORKDIR /app
 
+# 👇 Declare build-time variable
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
+
 # Install dependencies
 COPY package*.json ./
 RUN npm install
 
 # Copy source files
 COPY . .
+
+
 
 # Build optimized production output
 RUN npm run build

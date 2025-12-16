@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { getBreachByDomain } from "../../../../services/breachesService";
+import { getBreachByDomain } from "../../../services/breachesService";
 
-export const Route = createFileRoute("/api/exposed-or-not/breaches/$domain")({
+export const Route = createFileRoute("/exposed-or-not/breaches/$domain")({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   loader: ({ params, context }): any => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

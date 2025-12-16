@@ -2,6 +2,8 @@ services:
   nginx:
     build: ./nginx
     container_name: reverse_proxy
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - "80:80"
     depends_on:
@@ -50,16 +52,15 @@ services:
     volumes:
       - redis_data:/data
 
-  frontend:
-    build:
-      context: ./frontend_cyber
-      dockerfile: Dockerfile
-    container_name: xposed_or_not_frontend
-    environment:
-      # NOTE: frontend now calls NGINX, NOT gateway directly
-      VITE_API_URL: "http://localhost/api" # since nginx listens on port 80
-    ports:
-      - "5173:5173"
+  # frontend:
+  #   build:
+  #     context: ./frontend_cyber
+  #     dockerfile: Dockerfile
+  #     args:
+  #       VITE_API_URL: http://localhost
+  #   container_name: xposed_or_not_frontend
+  #   ports:
+  #     - "5173:5173"
 
   prometheus:
     image: prom/prometheus:latest

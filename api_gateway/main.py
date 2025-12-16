@@ -5,7 +5,9 @@ import socket
 import os
 from urllib.parse import quote
 
-app = FastAPI()
+app = FastAPI(
+    root_path="/api",
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -54,6 +56,9 @@ async def proxy(request: Request, url: str):
         status_code=resp.status_code,
         media_type=resp.headers.get("content-type")
     )
+
+
+
 
 
 @app.get("/")
