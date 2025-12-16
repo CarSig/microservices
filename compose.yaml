@@ -10,6 +10,8 @@ services:
   api_gateway:
     build: ./api_gateway
     container_name: api_gateway
+    environment:
+      DOMAINS_URL: ${DOMAINS_URL}
     expose:
       - "8000"
     depends_on:

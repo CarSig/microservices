@@ -19,6 +19,7 @@ async def fetch_email_breaches(client, email: str) -> EmailBreaches | ErrorRespo
 async def fetch_email_breach_analytics(client, email: str) -> EmailBreachAnalytics:
     response = await client.get(f"{XON_breach_analytics}{email}")
     data = response.json()
+    print(data)
     if "detail" in data:
         raise HTTPException(
             status_code=response.status_code,

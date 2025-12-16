@@ -18,14 +18,16 @@ def index() -> str:
 
 
 
+
+
+
+
+@router.get("/analytics/{email}", response_model=EmailBreachAnalytics | ErrorResponse)
+async def get_email_breach_analytics(request: Request,email: str):
+    client = request.app.client
+    return await fetch_email_breach_analytics(client, email)    
+
 @router.get("/{email}", response_model=EmailBreaches | ErrorResponse)
 async def get_email_breaches(request: Request,email: str):
     client = request.app.client
     return await fetch_email_breaches(client, email)
-
-
-
-@router.get("/analytics/{email}", response_model=EmailBreachAnalytics)
-async def get_email_breach_analytics(request: Request,email: str):
-    client = request.app.client
-    return await fetch_email_breach_analytics(client, email)    

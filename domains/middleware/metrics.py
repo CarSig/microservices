@@ -9,6 +9,9 @@ REQUEST_LATENCY = Histogram(
     "http_request_duration_seconds", "Latency", ["method", "path"]
 )
 
+
+
+
 class MetricsMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request, call_next):
         method = request.method

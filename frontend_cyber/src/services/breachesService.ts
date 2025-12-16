@@ -1,4 +1,4 @@
-import { api } from "../lib/api_exposed";
+import { api } from "../api/api_exposed";
 import type { components } from "../types/api";
 
 type Breaches = components["schemas"]["Breaches"];

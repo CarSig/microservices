@@ -3,6 +3,8 @@ import httpx
 from fastapi.middleware.cors import CORSMiddleware
 import socket
 import os
+from urllib.parse import quote
+
 app = FastAPI()
 
 app.add_middleware(
@@ -22,17 +24,13 @@ def resolve_or_default(host: str, port: int, fallback: str) -> str:
         return f"http://{host}:{port}"
     except socket.gaierror:
         return fallback
-# backend base URL inside Docker network
-# EXPOSED_OR_NOT_URL = "http://exposed_or_not_api:5000"
-DOMAINS_URL = resolve_or_default(
-    host="domains_api",
-    port=5000,
-    fallback="http://localhost:5000"
-)
 
-print("▼▼▼ Backend auto-selected ▼▼▼")
-print("EXPOSED_OR_NOT_URL =", DOMAINS_URL)
-print("▲▲▲ Backend auto-selected ▲▲▲")
+DOMAINS_URL = os.getenv("DOMAINS_URL")
+
+if not DOMAINS_URL:
+    DOMAINS_URL = "http://localhost:5000"
+    print("DOMAINS_URL not set, defaulting to localhost")
+
 
 
 
@@ -83,9 +81,11 @@ async def emails(email: str, request: Request):
     return await proxy(request, f"{DOMAINS_URL}/emails/{email}")
 
 
-@app.get("/analytics/{email}")
+@app.get("/emails/analytics/{email}")
 async def analytics(email: str, request: Request):
-    return await proxy(request, f"{DOMAINS_URL}/emails/analytics/{email}")
+    safe_email = quote(email)
+
+    return await proxy(request, f"{DOMAINS_URL}/emails/analytics/{safe_email}")
 
 
 @app.post("/store/breach")
