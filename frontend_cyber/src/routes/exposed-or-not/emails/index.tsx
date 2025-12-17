@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import EmailForm from "../../../components/Form";
+import EmailForm from "@components/Form";
 // import type { QueryClient } from "@tanstack/react-query";
-import { getEmailBreachAnalytic } from "../../../services/breachedEmailsService";
+import { getEmailBreachAnalytic } from "@services/breachedEmailsService";
 import { useState } from "react";
-import type { components } from "../../../types/api";
-import { Card } from "../../../components/Card";
+import { Card } from "@components/Card";
+import type { components } from "@schemaFastAPI";
+// import type { components } from "@schemaFastAPI";
 
 type EmailBreachAnalytics = components["schemas"]["EmailBreachAnalytics"];
 
@@ -40,24 +41,25 @@ function RouteComponent() {
 }
 
 const Analytics = ({ data }: { data: EmailBreachAnalytics }) => {
-  const { BreachMetrics, BreachesSummary } = data;
+  const { BreachMetrics } = data;
 
   return (
     <div>
-      <BreachMetricsComp metrics={data.BreachMetrics} />
-      <div>{JSON.stringify(BreachMetrics)}</div>
-      <div>{JSON.stringify(BreachesSummary)}</div>
+      <BreachMetricsComp metrics={BreachMetrics} />
+      {/* <div>{JSON.stringify(BreachMetrics)}</div> */}
+      {/* <div>{JSON.stringify(BreachesSummary)}</div> */}
     </div>
   );
 };
 
 const BreachMetricsComp = ({ metrics }: { metrics: Metrics }) => {
+  const { passwords_strength } = metrics;
+
   return (
     <Card>
       <h2>Metrics</h2>
-      {metrics.get_details.map((detail) => (
-        <p>{JSON.stringify(detail)}</p>
-      ))}
+
+      <h3>{JSON.stringify(passwords_strength)}</h3>
     </Card>
   );
 };

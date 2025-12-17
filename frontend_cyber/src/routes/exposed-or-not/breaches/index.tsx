@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import type { QueryClient } from "@tanstack/react-query";
-import { getBreaches } from "../../../services/breachesService";
+import { getBreaches } from "@services/breachesService";
 import { Link } from "@tanstack/react-router";
 import { useState, useCallback } from "react";
-import type { components } from "../../../types/api";
+import type { components } from "@schemaFastAPI";
 
-type Breach = components["schemas"]["Breach"];
+type BreachSmall = components["schemas"]["BreachSmall"];
 
 export const Route = createFileRoute("/exposed-or-not/breaches/")({
   loader: ({ context }) =>
@@ -46,7 +46,7 @@ function RouteComponent() {
   );
 }
 
-function BreachItem({ b }: { b: Breach }) {
+function BreachItem({ b }: { b: BreachSmall }) {
   return (
     <Link to={"/exposed-or-not/breaches/$domain"} params={{ domain: b.domain }} className="no-underline text-inherit">
       <div className="mb-5 border-2 p-4 rounded-lg shadow-md">

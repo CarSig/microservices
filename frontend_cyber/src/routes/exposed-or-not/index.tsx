@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CardWithLink } from "../../components/Card";
-// import type { Breach } from "../../../types/breach";
+import { CardWithLink } from "@components/Card";
 
 export const Route = createFileRoute("/exposed-or-not/")({
   component: RouteComponent,

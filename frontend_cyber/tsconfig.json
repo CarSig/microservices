@@ -4,6 +4,7 @@
   "compilerOptions": {
     "module": "ESNext", // or "NodeNext"
     "moduleResolution": "Bundler", // or "NodeNext"
+
     "noUncheckedIndexedAccess": true,
     "types": ["./src/router.d.ts"]
   }

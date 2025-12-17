@@ -10,6 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.middleware.request_duration import add_timing_header
 from app.middleware.metrics import MetricsMiddleware 
 from prometheus_client import generate_latest
+API_PREFIX = "/api"
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -22,10 +23,10 @@ app.middleware("http")(add_timing_header)
 app.add_middleware(MetricsMiddleware)
 
 
-app.include_router(emails_router)
-app.include_router(breach_router)
-app.include_router(store_to_db_router)
-app.include_router(certs_router)
+app.include_router(emails_router,prefix=API_PREFIX)
+app.include_router(breach_router,prefix=API_PREFIX)
+app.include_router(store_to_db_router,prefix=API_PREFIX)
+app.include_router(certs_router,prefix=API_PREFIX)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -51,7 +52,7 @@ def metrics():
 
 if __name__ == "__main__":
     uvicorn.run(
-        "main:app",
+        "app.main:app",
         host="localhost",
         port=8200,
         reload=True

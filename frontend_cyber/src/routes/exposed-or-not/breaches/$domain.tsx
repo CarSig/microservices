@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { getBreachByDomain } from "../../../services/breachesService";
+import { getBreachByDomain } from "@services/breachesService";
 
 export const Route = createFileRoute("/exposed-or-not/breaches/$domain")({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -25,7 +25,8 @@ function RouteComponent() {
   if (breachQuery.isLoading) return <p>Loading...</p>;
   if (breachQuery.isError) return <p>Error loading breach</p>;
 
-  const breach = breachQuery?.data?.exposedBreaches?.[0] ?? null;
+  // const breach = breachQuery?.data?.exposedBreaches?.[0] ?? null;
+  const breach = breachQuery?.data ?? null;
 
   if (!breach) return <p>No breach found for domain: {domain}</p>;
   return (

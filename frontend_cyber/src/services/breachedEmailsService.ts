@@ -1,5 +1,5 @@
 import { api } from "../api/api_exposed";
-import type { components } from "../types/api";
+import type { components } from "@schemaFastAPI";
 
 // type Breaches = components["schemas"]["Breaches"];
 type EmailBreaches = components["schemas"]["EmailBreaches"];

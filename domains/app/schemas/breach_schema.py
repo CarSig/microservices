@@ -40,7 +40,33 @@ class Breach(BaseModel):
 
 
 
+class BreachSmall(BaseModel):
+
+    breachID: str = Field(alias="breach_id")
+    breachedDate: date = Field(alias="breached_date")
+    exposedRecords: int | None = Field(alias="exposed_records")
+
+    domain: str
+    industry: str
+
+    model_config = {
+            "from_attributes": True,
+            "populate_by_name": True
+        }
+    def to_sqlalchemy(self):
+    
+        return {
+            "breach_id": self.breachID,
+            "domain": self.domain,
+            "breached_date": self.breachedDate,   
+            "industry": self.industry,
+            "exposedRecords":self.exposedRecords
+
+        }
+
+
+
 class Breaches(BaseModel):
-    exposedBreaches: list[Breach]
+    exposedBreaches: list[BreachSmall]
 
 

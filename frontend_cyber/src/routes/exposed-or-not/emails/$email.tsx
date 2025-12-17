@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { getEmailBreach } from "../../../services/breachedEmailsService";
+import { getEmailBreach } from "@services/breachedEmailsService";
 import { useQuery } from "@tanstack/react-query";
 
 export const Route = createFileRoute("/exposed-or-not/emails/$email")({

@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from app.schemas.email_schema_parts import XposedData,IndustryData,RiskData,DictWithInts
 class ErrorResponse(BaseModel):
     Error : str
     email: str | None
@@ -6,11 +7,11 @@ class ErrorResponse(BaseModel):
     
 class BreachMetrics(BaseModel):
     get_details: list[str]
-    industry: list[list[list[str | int]]]
-    passwords_strength: list[dict]
-    risk: list[dict]
-    xposed_data : list[dict]
-    yearwise_details: list[dict]
+    industry: IndustryData
+    passwords_strength: DictWithInts
+    risk: RiskData
+    xposed_data :XposedData
+    yearwise_details: DictWithInts
 
 class Summary (BaseModel):
     site: str    
